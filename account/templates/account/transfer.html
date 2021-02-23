@@ -1,0 +1,19 @@
+{% extends "account/account.html" %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Make a Transfer</legend>
+        <br>
+        <!--  form|crispy  -->
+        <label for="">Povide account number</label>
+        <input type="number" min="16" max="16">
+        <label for="">Provide amount</label>
+        <input type="number" min="16" max="16">
+    </fieldset>
+    <br>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Send Transfer</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "account/account.html" %}
+{% block content %}
+<h1>Your main account: 1010 2345 0001 0000 9087 4546</h1>
+<br><br>
+<form method="POST">
+    {% csrf_token %}
+    <fieldset class="form-group">
+        <legend class="border-bottom mb-4">Deposit Money</legend>
+        <!--  form|crispy  -->
+        <label for="">Provide amount:</label>
+        <input type="number">
+    </fieldset>
+    <br>
+    <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Confirm</button>
+    </div>
+</form>
+{% endblock %}

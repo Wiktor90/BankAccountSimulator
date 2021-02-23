@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-size: 1.6rem;
+        }
+
+        nav {
+            min-height: 10vh;
+            background: rgb(158, 158, 158);
+            margin-bottom: 2.5rem;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+        }
+
+        span {
+            color: green;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 4rem 2rem;
+            font-size: 2.2rem;
+            list-style: none;
+        }
+
+        .content {
+            min-height: 70vh;
+            margin: auto 10%;
+            padding: 4rem;
+            background: #efefef;
+            -webkit-box-shadow: 5px 5px 25px 0px #000000;
+            box-shadow: 5px 5px 25px 0px #000000;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class='nav-links'>
+            <li><a href="{% url 'saldoView' %}">Saldo</a></li>
+            <li><a href="{% url 'transferView' %}">Transfer</a></li>
+            <li><a href="{% url 'depositView' %}">Deposit</a></li>
+            <li><a href="{% url 'historyView' %}">History</a></li>
+            <li><a href="{% url 'logout' %}">LogOut</a></li>
+        </ul>
+    </nav>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>
