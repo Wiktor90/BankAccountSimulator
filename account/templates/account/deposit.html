@@ -2,7 +2,8 @@
 {% load crispy_forms_tags %}
 {% block content %}
 <h1>{{ request.user.first_name }} {{ request.user.last_name }} Bank Account: {{ account.accountNumber}}</h1>
-<br><br>
+<br>
+{% if account %}
 <form method="POST">
     {% csrf_token %}
     <fieldset class="form-group">
@@ -15,4 +16,7 @@
         <button class="btn btn-outline-info btn-lg" type="submit">Confirm</button>
     </div>
 </form>
+{% else %}
+<h1>You don't have Bank Account yet. Please contact administrator.</h1>
+{% endif %}
 {% endblock %}

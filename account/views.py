@@ -4,14 +4,16 @@ from .forms import TransactionForm, DepositForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+import os
+import csv
 
 
 def entryView(request):
     return render(request, 'account/base.html')
 
 
-def accountView(request):
-    return render(request, 'account/account.html')
+# def accountView(request):
+#     return render(request, 'account/account.html')
 
 
 @login_required(login_url='login')
@@ -81,9 +83,32 @@ def depositView(request):
     return render(request, 'account/deposit.html', context)
 
 
+def export_to_csv(path, querySet):
+    with open(path, 'w+') as f:
+        writer = csv.writer(f, delimiter=',', quotechar='"',
+                            quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(['Title', 'Amount', 'ToAccount', 'Date', ])
+        for item in querySet:
+            writer.writerow(
+                [item.title, item.amount, item.destinationAccount, item.transactionDate])
+
+
 @login_required(login_url='login')
 def historyView(request):
     transactions = Transaction.objects.filter(
         owner=request.user).order_by('-transactionDate')
     context = {'transactions': transactions}
     return render(request, 'account/history.html', context)
+
+
+def importHistory(request):
+    transactions = Transaction.objects.filter(
+        owner=request.user).order_by('-transactionDate')
+    filename = 'transactions.csv'
+    path = os.getcwd()
+    end_path = os.path.join(path, filename)
+    export_to_csv(end_path, transactions)
+    messages.success(
+        request, f'File succesfuly saved in: {end_path}', extra_tags='import')
+
+    return redirect('historyView')

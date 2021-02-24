@@ -1,18 +1,23 @@
 {% extends "account/account.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="POST">
-    {% csrf_token %}
-    <fieldset class="form-group">
-        <legend class="border-bottom mb-4">Make a Transfer</legend>
+
+{% if account %}
+    <form method="POST">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Make a Transfer</legend>
+            <br>
+            {{ form|crispy }}
+        </fieldset>
         <br>
-        {{ form|crispy }}
-    </fieldset>
-    <br>
-    <div class="form-group">
-        <button class="btn btn-outline-info btn-lg" type="submit">Send Transfer</button>
-    </div>
-</form>
+        <div class="form-group">
+            <button class="btn btn-outline-info btn-lg" type="submit">Send Transfer</button>
+        </div>
+    </form>
+{% else %}
+    <h1>You don't have Bank Account yet. Please contact administrator.</h1>
+{% endif %}
 
 {% for message in messages %}
 {% if 'transError' in message.tags %}

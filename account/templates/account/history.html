@@ -9,7 +9,15 @@
 </ul>
 <br><br>
 <div>
-    <button class="btn btn-outline-info btn-lg">Import to CSV</button>
+    <form method="post" action="{% url 'importHistory' %}">
+        {% csrf_token %}
+        <button class="btn btn-outline-info btn-lg" type="submit">Import to CSV</button>
+    </form>
 </div>
+{% for message in messages %}
+	{% if 'import' in message.tags %}
+        <p>{{ message }}</p>
+    {% endif %}
+{% endfor %}
 
 {% endblock %}
