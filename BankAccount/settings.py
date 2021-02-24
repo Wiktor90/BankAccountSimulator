@@ -126,5 +126,5 @@ STATIC_URL = '/static/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # new nawigation after login (instead of defalut profile/account)
-LOGIN_REDIRECT_URL = 'entryView'
+LOGIN_REDIRECT_URL = 'saldoView'
 LOGIN_URL = 'login'

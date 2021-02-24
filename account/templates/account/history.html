@@ -1,14 +1,15 @@
 {% extends "account/account.html" %}
 {% block content %}
-<h1>Jan Kowalski - Transaction History</h1>
+<h1>{{ request.user.first_name }} {{ request.user.last_name }} - Transaction History</h1>
+<br>
 <ul>
-    <li>1. Title - Amount: - Date</li>
-    <li>2. Title - Amount: - Date</li>
-    <li>3. Title - Amount: - Date</li>
+    {% for t in transactions %}
+    <li>{{ forloop.counter }}. {{ t.title }} - {{ t.amount }} PLN - {{ t.transactionDate|date:"SHORT_DATE_FORMAT"}} {{t.transactionDate|time:"h:i a"}}</li>
+    {% endfor %}
 </ul>
 <br><br>
 <div>
-    <button>Import to CSV</button>
+    <button class="btn btn-outline-info btn-lg">Import to CSV</button>
 </div>
 
 {% endblock %}
