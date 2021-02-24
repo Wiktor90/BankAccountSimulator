@@ -12,8 +12,8 @@ def entryView(request):
     return render(request, 'account/base.html')
 
 
-# def accountView(request):
-#     return render(request, 'account/account.html')
+def accountView(request):
+    return render(request, 'account/account.html')
 
 
 @login_required(login_url='login')
